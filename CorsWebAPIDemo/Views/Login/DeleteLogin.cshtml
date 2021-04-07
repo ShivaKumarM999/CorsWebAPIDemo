@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "DeleteLogin";
+}
+
+<h2>DeleteLogin</h2>
+
+<form id="form1">
+    <p>
+        <label for="StudentID">Student ID to Delete:</label>
+        <input type="text" id="StudentId" name="StudentId" />
+    </p>
+
+    <p>
+        <input type="button" id="button1" value="Delete" />
+        <span id="ResponseSpan"></span>
+    </p>
+
+</form>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<!-- jquery code -->
+<script type="text/javascript">
+    $(function () {
+
+        $("#button1").click(
+        function () {
+
+            //ajax code
+            $.ajax({
+                url: 'http://localhost:56795/api/Students/' + $("#StudentId").val(),
+                data: {},
+                type: "delete",
+                success: function (response) {
+
+                    $("#ResponseSpan").html(response);
+                    alert("record deleted")
+                },
+                error: function (jqXHR, textStatus, err) {
+                    $("#ResponseSpan").html(err);
+                }
+            });
+
+        });
+
+    });
+</script>

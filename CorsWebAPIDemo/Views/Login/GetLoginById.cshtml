@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "GetLoginById";
+}
+
+<h2>GetLoginById</h2>
+
+<label for="StudentID">Student ID:</label>
+<input type="text" id="StudentID" />
+
+<input type="button" value="Get Student (using Web API)" id="button1" />
+
+<span id="ResponseSpan"></span>
+
+<p>
+    <span>Student ID:</span>
+    <span style="font-weight:bold" id="StudentIDSpan">  </span>
+</p>
+
+<p>
+    <span>Student Name:</span>
+    <span style="font-weight:bold" id="StudentNameSpan">  </span>
+</p>
+
+<p>
+    <span>Marks:</span>
+    <span style="font-weight:bold" id="MarksSpan">  </span>
+</p>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("#button1").click(function () {
+
+
+
+            $.ajax({
+
+                url: 'http://localhost:56795/api/Students/' + $("#StudentID").val(),
+                data: {},
+                type: "get",
+
+                             success: function (response) {
+                                 $("#StudentIDSpan").html(response.StudentId);
+                                 $("#StudentNameSpan").html(response.StudentName);
+                    $("#MarksSpan").html(response.Marks);
+
+                },
+                error: function (jqXHR, textStatus, err) {
+                    $("#ResponseSpan").html(err);
+                }
+            });
+
+        });
+
+    });
+
+</script>
+
+
+
